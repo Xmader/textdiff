@@ -1,0 +1,36 @@
+{
+  "name": "textdiff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "homepage": "https://github.com/Xmader/textdiff#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xmader/textdiff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Xmader/textdiff/issues"
+  },
+  "keywords": [
+    "diff",
+    "text",
+    "patch"
+  ],
+  "author": "Xmader",
+  "license": "MIT",
+  "types": "types/index.d.ts",
+  "files": [
+    "types",
+    "index.js"
+  ],
+  "dependencies": {
+    "fast-diff": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.3",
+    "should": "^13.2.3"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
