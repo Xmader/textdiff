@@ -54,3 +54,67 @@ describe("Should correctly apply delta patches for:", () => {
         (textdiff.apply("", deltas.empty_to_empty)).should.equal("")
     })
 })
+
+describe("Should correctly reverse the delta patches and apply for:", () => {
+    it("v1 -> v2", () => {
+        (textdiff.apply(v1, textdiff.reverse(deltas.v2_to_v1))).should.equal(v2)
+    })
+    it("v2 -> v1", () => {
+        (textdiff.apply(v2, textdiff.reverse(deltas.v1_to_v2))).should.equal(v1)
+    })
+    it("v1 -> v1", () => {
+        (textdiff.apply(v1, textdiff.reverse(deltas.v1_to_v1))).should.equal(v1)
+    })
+    it("v1 -> empty", () => {
+        (textdiff.apply(v1, textdiff.reverse(deltas.empty_to_v1))).should.equal("")
+    })
+    it("empty -> v1", () => {
+        (textdiff.apply("", textdiff.reverse(deltas.v1_to_empty))).should.equal(v1)
+    })
+    it("empty -> empty", () => {
+        (textdiff.apply("", textdiff.reverse(deltas.empty_to_empty))).should.equal("")
+    })
+})
+
+describe("Should correctly calculate the number of characters inserted:", () => {
+    it("v1 -> v2", () => {
+        (textdiff.getTotalInsert(deltas.v1_to_v2)).should.equal(110)
+    })
+    it("v2 -> v1", () => {
+        (textdiff.getTotalInsert(deltas.v2_to_v1)).should.equal(6)
+    })
+    it("v1 -> v1", () => {
+        (textdiff.getTotalInsert(deltas.v1_to_v1)).should.equal(0)
+    })
+    it("v1 -> empty", () => {
+        (textdiff.getTotalInsert(deltas.v1_to_empty)).should.equal(0)
+    })
+    it("empty -> v1", () => {
+        (textdiff.getTotalInsert(deltas.empty_to_v1)).should.equal(v1.length)
+    })
+    it("empty -> empty", () => {
+        (textdiff.getTotalInsert(deltas.empty_to_empty)).should.equal(0)
+    })
+})
+
+describe("Should correctly calculate the number of characters deleted:", () => {
+    it("v1 -> v2", () => {
+        (textdiff.getTotalDelete(deltas.v1_to_v2)).should.equal(6)
+    })
+    it("v2 -> v1", () => {
+        (textdiff.getTotalDelete(deltas.v2_to_v1)).should.equal(110)
+    })
+    it("v1 -> v1", () => {
+        (textdiff.getTotalDelete(deltas.v1_to_v1)).should.equal(0)
+    })
+    it("v1 -> empty", () => {
+        (textdiff.getTotalDelete(deltas.v1_to_empty)).should.equal(v1.length)
+    })
+    it("empty -> v1", () => {
+        (textdiff.getTotalDelete(deltas.empty_to_v1)).should.equal(0)
+    })
+    it("empty -> empty", () => {
+        (textdiff.getTotalDelete(deltas.empty_to_empty)).should.equal(0)
+    })
+})
+

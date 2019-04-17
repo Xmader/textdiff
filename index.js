@@ -5,9 +5,10 @@ const fastDiff = require("fast-diff")
 const Diff = {
 
     /**
+     * @typedef {import(".").Delta} Delta
      * @param {string} original 
      * @param {string} revision 
-     * @returns {import(".").Delta}
+     * @returns {Delta}
      */
     create(original, revision) {
         const result = fastDiff(original, revision)
@@ -31,7 +32,7 @@ const Diff = {
 
     /**
      * @param {string} original 
-     * @param {import(".").Delta} delta 
+     * @param {Delta} delta 
      */
     apply(original, delta) {
         let result = ""
@@ -53,6 +54,48 @@ const Diff = {
         }
 
         return result
+    },
+
+    /**
+     * @param {Delta} delta 
+     */
+    reverse(delta) {
+        return delta.map((x) => {
+            const item = x.concat()
+            item[0] = -item[0]
+            return item
+        })
+    },
+
+    /**
+     * 获取该种差异操作总计应用的字符数
+     * @param {Delta} delta 
+     * @param {import(".").Operation} operation 差异操作
+     */
+    getTotalNumber(delta, operation) {
+        return delta.reduce((n, item) => {
+            if (item[0] == operation) {
+                return n + item[1]
+            } else {
+                return n
+            }
+        }, 0)
+    },
+
+    /**
+     * 获取总计插入的字符数
+     * @param {Delta} delta 
+     */
+    getTotalInsert(delta) {
+        return Diff.getTotalNumber(delta, 1)
+    },
+
+    /**
+     * 获取总计删除的字符数
+     * @param {Delta} delta 
+     */
+    getTotalDelete(delta) {
+        return Diff.getTotalNumber(delta, -1)
     },
 
 }

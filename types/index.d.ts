@@ -2,7 +2,7 @@
 // Project: https://github.com/Xmader/textdiff/
 // Definitions by: Xmader <https://github.com/Xmader>
 
-declare enum Operation {
+export declare enum Operation {
     INSERT = 1,
     EQUAL = 0,
     DELETE = -1,
@@ -25,6 +25,10 @@ export interface Delta extends Array<DiffItem> { }
 export interface Diff {
     create(original: string, revision: string): Delta;
     apply(original: string, delta: Delta): string;
+    reverse(delta: Delta): Delta;
+    getTotalNumber(delta: Delta, operation: Operation): number;
+    getTotalInsert(delta: Delta): number;
+    getTotalDelete(delta: Delta): number;
 }
 
 declare const textdiff: Diff
