@@ -1,5 +1,5 @@
 {
-  "name": "textdiff",
+  "name": "@xmader/textdiff",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
