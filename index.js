@@ -68,7 +68,7 @@ const Diff = {
     },
 
     /**
-     * 获取该种差异操作总计应用的字符数
+     * 获取 delta 中该种差异操作总计应用的字符数
      * @param {Delta} delta 
      * @param {import(".").Operation} operation 差异操作
      */
@@ -83,18 +83,18 @@ const Diff = {
     },
 
     /**
-     * 获取总计插入的字符数
+     * 获取 delta 中总计插入的字符数
      * @param {Delta} delta 
      */
-    getTotalInsert(delta) {
+    getTotalInserted(delta) {
         return Diff.getTotalNumber(delta, 1)
     },
 
     /**
-     * 获取总计删除的字符数
+     * 获取 delta 中总计删除的字符数
      * @param {Delta} delta 
      */
-    getTotalDelete(delta) {
+    getTotalDeleted(delta) {
         return Diff.getTotalNumber(delta, -1)
     },
 

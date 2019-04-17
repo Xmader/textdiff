@@ -27,8 +27,8 @@ export interface Diff {
     apply(original: string, delta: Delta): string;
     reverse(delta: Delta): Delta;
     getTotalNumber(delta: Delta, operation: Operation): number;
-    getTotalInsert(delta: Delta): number;
-    getTotalDelete(delta: Delta): number;
+    getTotalInserted(delta: Delta): number;
+    getTotalDeleted(delta: Delta): number;
 }
 
 declare const textdiff: Diff
